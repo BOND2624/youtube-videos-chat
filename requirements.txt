@@ -1,2 +1,8 @@
-google-api-python-client
-python-dotenv
+crewai>=0.13.0
+crewai-tools>=0.0.9
+youtube-transcript-api>=0.6.1
+litellm>=1.15.0
+chromadb>=0.4.22
+langchain>=0.1.0
+google-api-python-client>=2.0.0
+python-dotenv>=1.0.0
