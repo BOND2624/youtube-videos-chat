@@ -1,8 +1,27 @@
-crewai>=0.13.0
-crewai-tools>=0.0.9
-youtube-transcript-api>=0.6.1
-litellm>=1.15.0
+# Core Dependencies
+streamlit>=1.31.0
+python-dotenv>=1.0.0
 chromadb>=0.4.22
 langchain>=0.1.0
+langchain-groq>=0.1.1
+
+# YouTube Integration
 google-api-python-client>=2.0.0
-python-dotenv>=1.0.0
+youtube-transcript-api>=0.6.1
+
+# Utility Libraries
+numpy>=1.24.0
+pandas>=2.0.0
+pytest>=8.0.0
+requests>=2.31.0
+typing-extensions>=4.8.0
+python-dateutil>=2.8.2
+
+# Logging and Monitoring
+logging>=0.5.1.2
+colorama>=0.4.6
+
+# Development Tools
+black>=24.1.0
+flake8>=7.0.0
+isort>=5.13.0
