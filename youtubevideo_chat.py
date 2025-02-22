@@ -14,24 +14,25 @@ import agentops
 
 from langtrace_python_sdk import langtrace
 
-langtrace.init(api_key = 'cf37198dd30d4d65e149e4581ecc9e19749d94142026236d65460d794bfb90b0')
+# Load environment variables first
+load_dotenv()
+
+# Initialize with environment variables
+langtrace.init(api_key=os.getenv('LANGTRACE_API_KEY'))
 
 agentops.init(
-    api_key='40691a47-907e-4ab3-9099-13d4c4c3683f',
+    api_key=os.getenv('AGENTOPS_API_KEY'),
     default_tags=['crewai']
 )
 
-# Load environment variables
-load_dotenv()
-
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY")
-
-if not GROQ_API_KEY or not YOUTUBE_API_KEY:
-    raise ValueError("Missing required API keys. Please check your .env file.")
+# Check for required API keys
+required_keys = ['GROQ_API_KEY', 'YOUTUBE_API_KEY', 'LANGTRACE_API_KEY', 'AGENTOPS_API_KEY']
+missing_keys = [key for key in required_keys if not os.getenv(key)]
+if missing_keys:
+    raise ValueError(f"Missing required API keys: {', '.join(missing_keys)}. Please check your .env file.")
 
 # Initialize YouTube API
-youtube = build('youtube', 'v3', developerKey=YOUTUBE_API_KEY)
+youtube = build('youtube', 'v3', developerKey=os.getenv("YOUTUBE_API_KEY"))
 
 # Initialize ChromaDB
 client = chromadb.PersistentClient(path="./rag_db")
@@ -41,7 +42,7 @@ collection = client.get_or_create_collection(name="youtube_content")
 llm = ChatGroq(
     model_name="mixtral-8x7b-32768",  
     temperature=0.7,
-    groq_api_key=GROQ_API_KEY,
+    groq_api_key=os.getenv("GROQ_API_KEY"),
     max_retries=3  
 )
 
